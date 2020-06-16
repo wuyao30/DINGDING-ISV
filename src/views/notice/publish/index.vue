@@ -1,0 +1,164 @@
+<template>
+  <div class="createPost-container">
+    <sticky :class-name="'sub-navbar'">
+      <el-button v-loading="loading" :disabled="canNew" style="margin-left: 10px;" type="success" @click="submitForm">
+        创建通知
+      </el-button>
+    </sticky>
+    <el-form ref="postForm" :model="postForm" label-position="left" :rules="rules" class="form-container">
+      <div class="createPost-main-container">
+        <el-row :gutter="15">
+          <el-col :span="6">
+            <el-form-item label-width="80px" label="通知类型:" class="postInfo-container-item">
+              <el-select v-model="postForm.type" placeholder="请选择" clearable class="filter-item">
+                <el-option v-for="item in noticeOptions" :key="item.key" :label="item.label" :value="item.key"/>
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="6">
+            <el-form-item label-width="80px" label="发布人员:" class="postInfo-container-item">
+              <el-input placeholder="发布人员" v-model="postForm.writeUser" required/>
+            </el-form-item>
+          </el-col>
+          <el-col :span="6">
+            <el-form-item label-width="80px" label="发布时间:" class="postInfo-container-item">
+              <el-date-picker v-model="postForm.display_time" type="date" placeholder="选择日期时间"/>
+            </el-form-item>
+          </el-col>
+          <el-col :span="6">
+            <el-form-item label-width="80px" label="重要性:" class="postInfo-container-item">
+              <el-rate
+                v-model="postForm.importance"
+                :max="3"
+                :colors="['#99A9BF', '#F7BA2A', '#FF9900']"
+                :low-threshold="1"
+                :high-threshold="3"
+                style="margin-top:8px;"/>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <div class="postInfo-container">
+          <el-row>
+            <el-col :span="20">
+              <el-form-item style="margin-bottom: 20px;" label-width="80px" label="通知标题:">
+                <el-input :rows="1" v-model="postForm.title" type="textarea" clearable class="article-textarea" autosize placeholder="请输入通知标题"/>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </div>
+
+        <div class="postInfo-container">
+          <el-row>
+            <el-col :span="20">
+              <el-form-item style="margin-bottom: 40px;" label-width="80px" label="摘要:">
+                <el-input v-model="postForm.summary" type="textarea" class="article-textarea" autosize placeholder="请输入内容"/>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </div>
+
+        <div class="editor-container">
+          <Tinymce ref="editor" :height="400" v-model="postForm.infoContent" />
+        </div>
+      </div>
+    </el-form>
+  </div>
+</template>
+
+<script>
+import Sticky from '@/components/Sticky'
+import Tinymce from '@/components/Tinymce'
+
+const defaultForm = {
+  status: 'draft',
+  title: '', // 文章题目
+  writeTime: '',
+  type: undefined,
+  istop: 0,
+  writeUser: undefined,
+  infoContent: '', // 文章内容
+  summary: '', // 文章摘要
+  source_uri: '', // 文章外链
+  image_uri: '', // 文章图片
+  display_time: undefined, // 前台展示时间
+  id: undefined,
+  tongzhiId: 0,
+  platforms: ['a-platform'],
+  comment_disabled: false,
+  importance: 0
+}
+const validateRequire = (rule, value, callback) => {
+  if (value === '') {
+    this.$message({
+      message: rule.field + '为必传项',
+      type: 'error'
+    })
+    callback(new Error(rule.field + '为必传项'))
+  } else {
+    callback()
+  }
+}
+
+export default {
+  components: { Sticky, Tinymce },
+  name: 'Index',
+  data() {
+    return {
+      postForm: Object.assign({}, defaultForm),
+      noticeOptions: [{ label: '通知公告', key: 1 }, { label: '上级声音', key: 2 }, { label: '警示公告', key: 3 }, { label: '交流园地', key: 4 }, { label: '资料库', key: 5 }],
+      loading: false,
+      canNew: false,
+      rules: {
+        title: [{ validator: validateRequire }],
+        infoContent: [{ validator: validateRequire }]
+      }
+    }
+  },
+  methods: {
+    submitForm() {
+      console.log(this.postForm.infoContent)
+    }
+  }
+}
+</script>
+
+<style rel="stylesheet/scss" lang="scss" scoped>
+  @import "src/styles/mixin.scss";
+  .createPost-container {
+    position: relative;
+    .createPost-main-container {
+      padding: 40px 45px 20px 50px;
+      .postInfo-container-item {
+        float: left;
+        & /deep/ .el-date-editor {
+          width: 150px;
+        }
+      }
+      .postInfo-container {
+        position: relative;
+        @include clearfix;
+        margin-bottom: 10px;
+        .postInfo-container-item {
+          float: left;
+        }
+      }
+      .editor-container {
+        min-height: 500px;
+        margin: 0 0 30px;
+        .editor-upload-btn-container {
+          text-align: right;
+          margin-right: 10px;
+          .editor-upload-btn {
+            display: inline-block;
+          }
+        }
+      }
+    }
+    .word-counter {
+      width: 40px;
+      position: absolute;
+      right: -10px;
+      top: 0px;
+    }
+  }
+</style>

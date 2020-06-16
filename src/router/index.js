@@ -51,8 +51,28 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
+      meta: { title: '总览', icon: 'dashboard' }
     }]
+  },
+  {
+    path: '/notice',
+    component: Layout,
+    redirect: '/notice',
+    meta: { title: '通知管理', icon: 'modify' },
+    children: [
+      {
+        path: 'index',
+        name: 'index',
+        component: () => import('@/views/notice/publish/index'),
+        meta: { title: '通知发布', icon: 'publish' }
+      },
+      {
+        path: 'modify',
+        name: 'modify',
+        component: () => import('@/views/notice/modify/index'),
+        meta: { title: '通知修改', icon: 'modify1' }
+      }
+    ]
   },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
