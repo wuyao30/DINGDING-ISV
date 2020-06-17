@@ -11,18 +11,18 @@
           <el-col :span="6">
             <el-form-item label-width="80px" label="通知类型:" class="postInfo-container-item">
               <el-select v-model="postForm.type" placeholder="请选择" clearable class="filter-item">
-                <el-option v-for="item in noticeOptions" :key="item.key" :label="item.label" :value="item.key"/>
+                <el-option v-for="item in noticeOptions" :key="item.key" :label="item.label" :value="item.key" />
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="6">
             <el-form-item label-width="80px" label="发布人员:" class="postInfo-container-item">
-              <el-input placeholder="发布人员" v-model="postForm.writeUser" required/>
+              <el-input v-model="postForm.writeUser" placeholder="发布人员" required />
             </el-form-item>
           </el-col>
           <el-col :span="6">
             <el-form-item label-width="80px" label="发布时间:" class="postInfo-container-item">
-              <el-date-picker v-model="postForm.display_time" type="date" placeholder="选择日期时间"/>
+              <el-date-picker v-model="postForm.display_time" type="date" placeholder="选择日期时间" />
             </el-form-item>
           </el-col>
           <el-col :span="6">
@@ -33,7 +33,8 @@
                 :colors="['#99A9BF', '#F7BA2A', '#FF9900']"
                 :low-threshold="1"
                 :high-threshold="3"
-                style="margin-top:8px;"/>
+                style="margin-top:8px;"
+              />
             </el-form-item>
           </el-col>
         </el-row>
@@ -41,7 +42,7 @@
           <el-row>
             <el-col :span="20">
               <el-form-item style="margin-bottom: 20px;" label-width="80px" label="通知标题:">
-                <el-input :rows="1" v-model="postForm.title" type="textarea" clearable class="article-textarea" autosize placeholder="请输入通知标题"/>
+                <el-input v-model="postForm.title" :rows="1" type="textarea" clearable class="article-textarea" autosize placeholder="请输入通知标题" />
               </el-form-item>
             </el-col>
           </el-row>
@@ -51,14 +52,14 @@
           <el-row>
             <el-col :span="20">
               <el-form-item style="margin-bottom: 40px;" label-width="80px" label="摘要:">
-                <el-input v-model="postForm.summary" type="textarea" class="article-textarea" autosize placeholder="请输入内容"/>
+                <el-input v-model="postForm.summary" type="textarea" class="article-textarea" autosize placeholder="请输入内容" />
               </el-form-item>
             </el-col>
           </el-row>
         </div>
 
         <div class="editor-container">
-          <Tinymce ref="editor" :height="400" v-model="postForm.infoContent" />
+          <Tinymce ref="editor" v-model="postForm.infoContent" :height="400" />
         </div>
       </div>
     </el-form>
@@ -68,6 +69,7 @@
 <script>
 import Sticky from '@/components/Sticky'
 import Tinymce from '@/components/Tinymce'
+import { insertNotice } from '@/api/notice'
 
 const defaultForm = {
   status: 'draft',
@@ -100,8 +102,8 @@ const validateRequire = (rule, value, callback) => {
 }
 
 export default {
-  components: { Sticky, Tinymce },
   name: 'Index',
+  components: { Sticky, Tinymce },
   data() {
     return {
       postForm: Object.assign({}, defaultForm),
@@ -116,7 +118,26 @@ export default {
   },
   methods: {
     submitForm() {
-      console.log(this.postForm.infoContent)
+      this.postForm.url = this.postForm.image_uri
+      console.log(this.postForm)
+      insertNotice(this.postForm).then(response => {
+        this.loading = true
+        this.$notify({
+          title: '成功',
+          message: '发布文件/通知成功',
+          type: 'success',
+          duration: 2000
+        })
+        this.postForm.status = 'published'
+        this.loading = false
+      }).catch(() => {
+        this.$notify({
+          title: '失败',
+          message: '发布文章失败',
+          type: 'error',
+          duration: 2000
+        })
+      })
     }
   }
 }
