@@ -8,6 +8,13 @@ export function login(data) {
   })
 }
 
+export function loginByCode(code) {
+  return request({
+    url: `/token/enter?code=${code.code}`,
+    method: 'post'
+  })
+}
+
 export function getInfo(token) {
   return request({
     url: '/vue-admin-template/user/info',

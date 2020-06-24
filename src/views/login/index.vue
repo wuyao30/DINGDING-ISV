@@ -54,7 +54,8 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch('user/login', this.$route.query).then(() => {
+    console.log(this.$route.query)
+    this.$store.dispatch('user/loginByCode', this.$route.query).then(() => {
       this.$router.push({ path: this.redirect || '/' })
       this.loading = false
     }).catch(() => {

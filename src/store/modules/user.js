@@ -1,6 +1,7 @@
-import { login, logout, getInfo } from '@/api/user'
+import { login, logout, getInfo, loginByCode } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
+import { resolve } from 'tinymce'
 
 const getDefaultState = () => {
   return {
@@ -40,6 +41,15 @@ const mutations = {
 }
 
 const actions = {
+  //user loginByCode
+  loginByCode({commit}, code) {
+    return new Promise((resolve, reject) => {
+      loginByCode({code: code.code}).then(res => {
+        console.log(res)
+      })
+    })
+  },
+
   // user login
   login({ commit }, code) {
     return new Promise((resolve, reject) => {

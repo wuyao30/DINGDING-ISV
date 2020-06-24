@@ -14,25 +14,25 @@
           <el-col :span="6">
             <el-form-item label-width="80px" label="通知类型:" class="postInfo-container-item">
               <el-select v-model="postForm.type" placeholder="请选择" clearable class="filter-item" @change="noticeTypeChange">
-                <el-option v-for="item in noticeOptions" :key="item.key" :label="item.label" :value="item.key"/>
+                <el-option v-for="item in noticeOptions" :key="item.key" :label="item.label" :value="item.key" />
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="6">
             <el-form-item label-width="80px" label="通知内容:" class="postInfo-container-item">
               <el-select v-model="parachuanru.id" clearable class="filter-item" @change="tongzhixuhao">
-                <el-option v-for="(elem,index) of tongzhiOptions" :key="index" :label="elem.label" :value="elem.key"/>
+                <el-option v-for="(elem,index) of tongzhiOptions" :key="index" :label="elem.label" :value="elem.key" />
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="6">
             <el-form-item label-width="80px" label="发布人员:" class="postInfo-container-item">
-              <el-input placeholder="发布人员" v-model="postForm.writeUser" required/>
+              <el-input v-model="postForm.writeUser" placeholder="发布人员" required />
             </el-form-item>
           </el-col>
           <el-col :span="6">
             <el-form-item label-width="80px" label="发布时间:" class="postInfo-container-item">
-              <el-date-picker v-model="postForm.display_time" type="date" placeholder="选择日期时间"/>
+              <el-date-picker v-model="postForm.display_time" type="date" placeholder="选择日期时间" />
             </el-form-item>
           </el-col>
           <el-col :span="10">
@@ -43,7 +43,8 @@
                 :colors="['#99A9BF', '#F7BA2A', '#FF9900']"
                 :low-threshold="1"
                 :high-threshold="3"
-                style="margin-top:8px;"/>
+                style="margin-top:8px;" 
+              />
             </el-form-item>
           </el-col>
         </el-row>
@@ -95,9 +96,7 @@ export default {
   methods: {
     noticeTypeChange() {
       if (this.postForm.type > 0) {
-        getNotice() {
-
-        }
+        console.log('hello')
       }
       console.log(this.postForm.type)
     },
