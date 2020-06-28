@@ -1,7 +1,7 @@
 import { login, logout, getInfo, loginByCode } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
-import { resolve } from 'tinymce'
+import { Message } from 'element-ui'
 
 const getDefaultState = () => {
   return {
@@ -41,11 +41,17 @@ const mutations = {
 }
 
 const actions = {
-  //user loginByCode
-  loginByCode({commit}, code) {
+  // user loginByCode
+  loginByCode({ commit }, code) {
     return new Promise((resolve, reject) => {
-      loginByCode({code: code.code}).then(res => {
-        console.log(res)
+      loginByCode({ code: code }).then(res => {
+        const { token } = res.result
+        Message.success(token)
+        commit('SET_TOKEN', token)
+        setToken(token)
+        resolve()
+      }).catch(error => {
+        reject(error)
       })
     })
   },
@@ -68,17 +74,17 @@ const actions = {
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
       getInfo(state.token).then(response => {
-        const { data } = response
-        if (!data) {
+        const { result } = response
+        if (!result) {
           reject('Verification failed, please Login again.')
         }
-        const { corpInfo, userInfo } = data
-        commit('SET_NAME', userInfo.name)
-        commit('SET_AVATAR', userInfo.avatar)
-        commit('SET_USER_ID', userInfo.userId)
-        commit('SET_CORPORATION_ID', corpInfo.corpId)
-        commit('SET_CORPORATION_NAME', corpInfo.corpName)
-        resolve(data)
+        const { corpId, corpName, userName, userId } = result
+        commit('SET_NAME', userName)
+        commit('SET_USER_ID', userId)
+        commit('SET_AVATAR', 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif')
+        commit('SET_CORPORATION_ID', corpId)
+        commit('SET_CORPORATION_NAME', corpName)
+        resolve(result)
       }).catch(error => {
         reject(error)
       })

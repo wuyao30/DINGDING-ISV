@@ -10,14 +10,15 @@ export function login(data) {
 
 export function loginByCode(code) {
   return request({
-    url: `/token/enter?code=${code.code}`,
-    method: 'post'
+    url: '/token/enter',
+    method: 'get',
+    params: { code: code.code }
   })
 }
 
 export function getInfo(token) {
   return request({
-    url: '/vue-admin-template/user/info',
+    url: '/token/userinfo',
     method: 'get',
     params: { token }
   })

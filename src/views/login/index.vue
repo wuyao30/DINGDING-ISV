@@ -23,11 +23,6 @@
 
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
 
-      <div class="tips">
-        <span style="margin-right:20px;">username: admin</span>
-        <span> password: any</span>
-      </div>
-
     </el-form>
   </div>
 </template>
@@ -54,13 +49,15 @@ export default {
     }
   },
   created() {
-    console.log(this.$route.query)
-    this.$store.dispatch('user/loginByCode', this.$route.query).then(() => {
-      this.$router.push({ path: this.redirect || '/' })
-      this.loading = false
-    }).catch(() => {
-      this.loading = false
-    })
+    this.loginForm.code = this.$route.query.code
+    // this.$store.dispatch('user/loginByCode', this.$route.query.code).then(() => {
+    //   this.$router.push({ path: this.redirect || '/' })
+    //   // this.$router.push({ path: '/' })
+    //   this.loading = false
+    // }).catch(() => {
+    //   this.$message.error('router push failed')
+    //   this.loading = false
+    // })
   },
   methods: {
     showPwd() {
@@ -74,7 +71,15 @@ export default {
       })
     },
     handleLogin() {
-      this.$refs.loginForm.validate(valid => {
+      this.$store.dispatch('user/loginByCode', this.$route.query.code).then(() => {
+        this.$router.push({ name: 'Dashboard' })
+        // this.$router.push({ path: '/' })
+        this.loading = false
+      }).catch(() => {
+        this.$message.error('router push failed')
+        this.loading = false
+      })
+      /* this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
           this.$store.dispatch('user/login', this.loginForm).then(() => {
@@ -87,7 +92,7 @@ export default {
           console.log('error submit!!')
           return false
         }
-      })
+      })*/
     }
   }
 }
