@@ -48,16 +48,16 @@ export default {
       immediate: true
     }
   },
-  created() {
+  mounted() {
     this.loginForm.code = this.$route.query.code
-    // this.$store.dispatch('user/loginByCode', this.$route.query.code).then(() => {
-    //   this.$router.push({ path: this.redirect || '/' })
-    //   // this.$router.push({ path: '/' })
-    //   this.loading = false
-    // }).catch(() => {
-    //   this.$message.error('router push failed')
-    //   this.loading = false
-    // })
+    this.$store.dispatch('user/loginByCode', this.$route.query.code).then(() => {
+      this.$router.push({ path: this.redirect || 'dashboard' })
+      // this.$router.push({ path: '/' })
+      this.loading = false
+    }).catch(() => {
+      this.$message.error('router push failed')
+      this.loading = false
+    })
   },
   methods: {
     showPwd() {
@@ -71,14 +71,14 @@ export default {
       })
     },
     handleLogin() {
-      this.$store.dispatch('user/loginByCode', this.$route.query.code).then(() => {
-        this.$router.push({ name: 'Dashboard' })
-        // this.$router.push({ path: '/' })
-        this.loading = false
-      }).catch(() => {
-        this.$message.error('router push failed')
-        this.loading = false
-      })
+      // this.$store.dispatch('user/loginByCode', this.$route.query.code).then(() => {
+      //   this.$router.push({ name: 'Dashboard' })
+      //   // this.$router.push({ path: '/' })
+      //   this.loading = false
+      // }).catch(() => {
+      //   this.$message.error('router push failed')
+      //   this.loading = false
+      // })
       /* this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
