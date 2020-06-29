@@ -119,13 +119,52 @@ export const constantRoutes = [
     children: [
       {
         path: 'dingding',
-        component: () => import('@/views/example/dingding'),
+        component: () => import('@/views/dingding/dingding'),
         name: 'dingding',
         meta: {
           title: '发送钉钉通知',
           icon: 'dingding'
         }
       }]
+  },
+  {
+    path: '/test',
+    component: Layout,
+    redirect: '/test/createSurvey',
+    name: 'test',
+    meta: {
+      title: '调查问卷',
+      icon: 'bianji2'
+    },
+    children: [
+      {
+        path: 'createSurvey',
+        component: () => import('@/views/survey/create-survey'),
+        name: 'createSurvey',
+        meta: {
+          title: '新建调查问卷',
+          icon: 'icon-test'
+        }
+      },
+      {
+        path: 'createSurveyItem',
+        component: () => import('@/views/survey/create-survey-item'),
+        name: 'createSurveyItem',
+        meta: {
+          title: '调查问卷明细',
+          icon: 'bianji2'
+        }
+      },
+      {
+        path: 'createSurveyResult',
+        component: () => import('@/views/survey/create-survey-result'),
+        name: 'createSurveyResult',
+        meta: {
+          title: '问卷结果汇总',
+          icon: 'huizong'
+        }
+      }
+    ]
   },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }

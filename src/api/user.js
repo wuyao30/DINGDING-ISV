@@ -30,3 +30,12 @@ export function logout() {
     method: 'post'
   })
 }
+
+export function uploadMessage(data) {
+  return request({
+    url: 'http://118.190.175.198:8081/login/dingding',
+    headers: { 'Content-Type': 'application/json' },
+    method: 'POST',
+    data
+  })
+}
