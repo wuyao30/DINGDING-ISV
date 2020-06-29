@@ -74,6 +74,59 @@ export const constantRoutes = [
       }
     ]
   },
+  {
+    path: '/exam',
+    component: Layout,
+    redirect: '/exam/createexam',
+    name: 'exam',
+    meta: {
+      title: '考试管理',
+      icon: 'examRecord'
+    },
+    children: [
+      {
+        path: 'createexam',
+        component: () => import('@/views/exam/ExamDetail'),
+        name: 'CreateExam',
+        meta: { title: '创建试卷', icon: 'exam' }
+      },
+      {
+        path: 'modexam',
+        component: () => import('@/views/exam/ModExamDetail'),
+        name: 'ModExam',
+        meta: { title: '新建试题', icon: 'exam1' }
+      },
+      {
+        path: 'queryExamScore',
+        component: () => import('@/views/exam/exam-score'),
+        name: 'queryExamScore',
+        meta: {
+          title: '考试成绩',
+          icon: 'chengji-'
+        }
+      }
+    ]
+  },
+  {
+    path: '/example',
+    component: Layout,
+    redirect: '/example/dingding',
+    name: 'Example',
+    meta: {
+      title: '钉钉通知',
+      icon: 'example'
+    },
+    children: [
+      {
+        path: 'dingding',
+        component: () => import('@/views/example/dingding'),
+        name: 'dingding',
+        meta: {
+          title: '发送钉钉通知',
+          icon: 'dingding'
+        }
+      }]
+  },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
