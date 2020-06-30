@@ -17,7 +17,7 @@
           </el-col>
           <el-col :span="15">
             <el-form-item style="margin-bottom: 20px;" label-width="80px" label="试卷标题:">
-              <el-input :rows="1" v-model="postForm.title" disabled="true" type="textarea" clearable class="article-textarea" autosize placeholder="请输入试卷标题"/>
+              <el-input :rows="1" v-model="postForm.title" :disabled="true" type="textarea" clearable class="article-textarea" autosize placeholder="请输入试卷标题"/>
               <span v-show="titleShortLength" class="word-counter">{{ titleShortLength }}字</span>
             </el-form-item>
           </el-col>
@@ -25,35 +25,35 @@
         <el-row :gutter="20">
           <el-col :span="6">
             <el-form-item label-width="80px" label="开始时间:" class="postInfo-container-item">
-              <el-date-picker v-model="postForm.display_time" disabled="true" type="date" placeholder="选择日期时间" @change="changeEnd"/>
+              <el-date-picker v-model="postForm.startDate" :disabled="true" type="date" placeholder="选择日期时间" @change="changeEnd"/>
             </el-form-item>
           </el-col>
           <el-col :span="6">
             <el-form-item label-width="80px" label="结束时间:" class="postInfo-container-item">
-              <el-date-picker v-model="postForm.display_end_time" disabled="true" type="date" placeholder="选择日期时间" @change="changeEndd"/>
+              <el-date-picker v-model="postForm.endDate" :disabled="true" type="date" placeholder="选择日期时间" @change="changeEndd"/>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row :gutter="20">
           <el-col :span="6">
             <el-form-item label-width="80px" label="考试时长:" class="postInfo-container-item">
-              <el-input v-model="postForm.examLength" disabled="true" style="width: 220px;" required/>
+              <el-input v-model="postForm.examLength" :disabled="true" style="width: 220px;" required/>
             </el-form-item>
           </el-col>
           <el-col :span="6">
             <el-form-item label-width="80px" label="试卷状态:" class="postInfo-container-item">
-              <el-select v-model="postForm.iStop" disabled="true" class="filter-item" style="width: 220px;" clearable @change="shititype">
+              <el-select v-model="postForm.iStop" :disabled="true" class="filter-item" style="width: 220px;" clearable @change="shititype">
                 <el-option v-for="item in stopNotice" :key="item.key" :label="item.label" :value="item.key"/>
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :span="6">
-            <el-form-item label-width="80px" label="发布者:" class="postInfo-container-item">
-              <el-select v-model="postForm.isFinish" disabled="true" class="filter-item" style="width: 220px;" clearable @change="shititype">
-                <el-option v-for="item in pubNotice" :key="item.key" :label="item.label" :value="item.key"/>
-              </el-select>
-            </el-form-item>
-          </el-col>
+          <!--<el-col :span="6">-->
+            <!--<el-form-item label-width="80px" label="发布者:" class="postInfo-container-item">-->
+              <!--<el-select v-model="postForm.isFinish" disabled="true" class="filter-item" style="width: 220px;" clearable @change="shititype">-->
+                <!--<el-option v-for="item in pubNotice" :key="item.key" :label="item.label" :value="item.key"/>-->
+              <!--</el-select>-->
+            <!--</el-form-item>-->
+          <!--</el-col>-->
         </el-row>
         <el-row :gutter="20">
           <el-col :span="20">
@@ -73,36 +73,36 @@
         <el-row :gutter="20">
           <el-col :span="6">
             <el-form-item label-width="80px" label="单选题:" class="postInfo-container-item">
-              <el-input v-model="examAllInfo.singleInfo" disabled="true" style="width: 220px;" required/>
+              <el-input v-model="examAllInfo.singleInfo" :disabled="true" style="width: 220px;" required/>
             </el-form-item>
           </el-col>
           <el-col :span="6">
             <el-form-item label-width="80px" label="分值:" class="postInfo-container-item">
-              <el-input v-model="examAllInfo.singleInfoS" disabled="true" style="width: 220px;" required/>
+              <el-input v-model="examAllInfo.singleInfoS" :disabled="true" style="width: 220px;" required/>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row :gutter="20">
           <el-col :span="6">
             <el-form-item label-width="80px" label="多选题:" class="postInfo-container-item">
-              <el-input v-model="examAllInfo.multipleInfo" disabled="true" style="width: 220px;" required/>
+              <el-input v-model="examAllInfo.multipleInfo" :disabled="true" style="width: 220px;" required/>
             </el-form-item>
           </el-col>
           <el-col :span="6">
             <el-form-item label-width="80px" label="分值:" class="postInfo-container-item">
-              <el-input v-model="examAllInfo.multipleInfoS" disabled="true" style="width: 220px;" required/>
+              <el-input v-model="examAllInfo.multipleInfoS" :disabled="true" style="width: 220px;" required/>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row :gutter="20">
           <el-col :span="6">
             <el-form-item label-width="80px" label="判断题:" class="postInfo-container-item">
-              <el-input v-model="examAllInfo.judgeInfo" disabled="true" style="width: 220px;" required/>
+              <el-input v-model="examAllInfo.judgeInfo" :disabled="true" style="width: 220px;" required/>
             </el-form-item>
           </el-col>
           <el-col :span="6">
             <el-form-item label-width="80px" label="分值:" class="postInfo-container-item">
-              <el-input v-model="examAllInfo.judgeInfoS" disabled="true" style="width: 220px;" required/>
+              <el-input v-model="examAllInfo.judgeInfoS" :disabled="true" style="width: 220px;" required/>
             </el-form-item>
           </el-col>
         </el-row>
@@ -204,7 +204,6 @@ const defaultForm = {
 
   shijuanzhuangtai: '',
   shifoufabu: '',
-
   id: undefined,
   platforms: ['a-platform'],
   comment_disabled: false,
@@ -300,7 +299,6 @@ export default {
 
       },
       examData: {
-        queId: -1,
         queContent: '',
         queType: -1,
         queAnswer: '',
@@ -318,7 +316,6 @@ export default {
         isFinish: -1
       },
       examDataH: {
-        queId: -1,
         examId: 0,
         queContent: '',
         queType: -1,
@@ -334,7 +331,6 @@ export default {
         choiceH: ''
       },
       examDataG: {
-        queId: -1,
         examId: 0,
         queContent: '',
         queType: -1,
@@ -349,7 +345,6 @@ export default {
         choiceG: ''
       },
       examDataF: {
-        queId: -1,
         examId: 0,
         queContent: '',
         queType: -1,
@@ -364,7 +359,6 @@ export default {
 
       },
       examDataE: {
-        queId: -1,
         examId: 0,
         queContent: '',
         queType: -1,
@@ -378,7 +372,6 @@ export default {
 
       },
       examDataD: {
-        queId: -1,
         examId: 0,
         queContent: '',
         queType: -1,
@@ -391,7 +384,6 @@ export default {
 
       },
       examDataC: {
-        queId: -1,
         examId: 0,
         queContent: '',
         queType: -1,
@@ -403,7 +395,6 @@ export default {
 
       },
       examDataB: {
-        queId: -1,
         examId: 0,
         queContent: '',
         queType: -1,
@@ -414,7 +405,6 @@ export default {
 
       },
       examDataA: {
-        queId: -1,
         examId: 0,
         queContent: '',
         queType: -1,
@@ -509,15 +499,15 @@ export default {
     // this.tongzhiOptions[1] = '请选择通知编号'
 
     getExamInfo(getToken()).then(response => {
-      // console.log(':::'+response.data.length)
-      for (var ii = 0; ii < response.data.length; ii++) {
+      // console.log(':::'+response.length)
+      for (var ii = 0; ii < response.length; ii++) {
         // let jj = ii+1
         map = Object()
-        map.key = response.data[ii].examId
-        map.label = response.data[ii].examName
+        map.key = response[ii].examId
+        map.label = response[ii].examName
         this.noticeOptions.push(map)
 
-        // console.log('iii:'+response.data[ii].title)
+        // console.log('iii:'+response[ii].title)
       }
       // console.log('the tz length is:' + this.tongzhiOptions.length)
 
@@ -530,11 +520,7 @@ export default {
     })
   },
   methods: {
-    shijufinish() {
-
-    },
     shijuanhao() {
-      console.log('this shi juan hao changed:' + this.postForm.examId)
       if (this.postForm.examId > 0) {
         this.canFaBuShiJuan = false
         this.canNewSurvey = true
@@ -565,27 +551,23 @@ export default {
       this.parachuanru.examId = this.postForm.examId
       console.log('the shi juan ID:' + this.parachuanru.examId)
       getExamDetailSingle(getToken(), this.parachuanru).then(response => {
-        this.postForm.title = response.data.examName
-        this.postForm.examLength = response.data.examLength
-        this.postForm.summary = response.data.info
-        this.chuanru.iStop = response.data.iStop
-        this.chuanru.isFinish = response.data.isFinish
-        this.postForm.iStop = parseInt(response.data.iStop)
-        this.postForm.isFinish = parseInt(response.data.isFinish)
-        this.postForm.startDate = response.data.startDate
+        this.postForm.title = response.examName
+        this.postForm.examLength = response.examLength
+        this.postForm.summary = response.info
+        this.chuanru.iStop = response.iStop
+        this.chuanru.isFinish = response.isFinish
+        this.postForm.iStop = parseInt(response.iStop)
+        this.postForm.isFinish = parseInt(response.isFinish)
+        this.postForm.startDate = response.startDate
         let ss = []
         console.log('istop label：' + this.stopNotice[parseInt(this.chuanru.iStop) + 1].label)
         this.postForm.zhuangtai = this.stopNotice[parseInt(this.chuanru.iStop) + 1].label
         this.postForm.fabu = this.pubNotice[parseInt(this.chuanru.isFinish) + 1].label
         if (this.postForm.startDate.length >= 8) {
           ss = this.postForm.startDate.split('-')
-          console.log('this.postForm.startDate ss0:' + ss[0])
-          console.log('this.postForm.startDate ss1:' + ss[1])
-          console.log('this.postForm.startDate ss2:' + ss[2])
-          console.log('???????????????___________:')
           this.postForm.display_time = new Date(parseInt(ss[0]), parseInt(ss[1]) - 1, parseInt(ss[2]))
         }
-        this.postForm.endDate = response.data.endDate
+        this.postForm.endDate = response.endDate
         console.log('the start date:' + this.postForm.startDate)
         console.log('the end date:' + this.postForm.endDate)
         ss = []
@@ -605,41 +587,34 @@ export default {
       this.timuSet = []
       this.timuSet[0] = map
       getAllQuestionByID(getToken(), this.parachuanru).then(response => {
-        for (var ii = 0; ii < response.data.length; ii++) {
+        for (var ii = 0; ii < response.length; ii++) {
           map = Object()
-          map.key = response.data[ii].queId
-          map.label = response.data[ii].queContent
+          map.key = response[ii].queId
+          map.label = response[ii].queContent
           this.timuSet.push(map)
         }
-        for (let kk = 0; kk < this.timuSet.length; kk++) {
-          // console.log('kk:'+kk+' => ' + this.tongzhiOptions[kk] )
-        }
-        // this.tongzhiOptions =  res
       }).catch(() => {
         console.log('获取题目错误')
       })
 
       this.parachuanru.examId = this.postForm.examId
       getInfo(getToken(), this.parachuanru).then(response => {
-        // console.log(':::'+response.data.length)
-        if (response.data) {
-          this.examAllInfo.examId = response.data.examId
-          this.examAllInfo.judgeExamScore = response.data.judgeExamScore
-          this.examAllInfo.judgeNumber = response.data.judgeNumber
-          this.examAllInfo.multipleExamScore = response.data.multipleExamScore
-          this.examAllInfo.multipleNumber = response.data.multipleNumber
-          this.examAllInfo.singleExamScore = response.data.singleExamScore
-          this.examAllInfo.singleNumber = response.data.singleNumber
+        if (response) {
+          this.examAllInfo.examId = response.examId
+          this.examAllInfo.judgeExamScore = response.judgeExamScore
+          this.examAllInfo.judgeNumber = response.judgeNumber
+          this.examAllInfo.multipleExamScore = response.multipleExamScore
+          this.examAllInfo.multipleNumber = response.multipleNumber
+          this.examAllInfo.singleExamScore = response.singleExamScore
+          this.examAllInfo.singleNumber = response.singleNumber
           console.log('获取 整体信息:' + this.examAllInfo.examId)
           const s1 = '' + (parseInt(this.examAllInfo.judgeNumber) + parseInt(this.examAllInfo.multipleNumber) + parseInt(this.examAllInfo.singleNumber)) + '试题 '
           const s2 = '' + (parseInt(this.examAllInfo.judgeExamScore) + parseInt(this.examAllInfo.multipleExamScore) + parseInt(this.examAllInfo.singleExamScore)) + '分'
           this.examAllInfo.allInfo = s1 + s2
           this.examAllInfo.singleInfo = '' + this.examAllInfo.singleNumber
           this.examAllInfo.singleInfoS = '' + this.examAllInfo.singleExamScore
-
           this.examAllInfo.multipleInfo = '' + this.examAllInfo.multipleNumber
           this.examAllInfo.multipleInfoS = '' + this.examAllInfo.multipleExamScore
-
           this.examAllInfo.judgeInfo = '' + this.examAllInfo.judgeNumber
           this.examAllInfo.judgeInfoS = '' + this.examAllInfo.judgeExamScore
         }
@@ -649,7 +624,7 @@ export default {
     },
     updateQuestion(value) {
       updateQue(getToken(), value).then(response => {
-        console.log(response.data)
+        console.log(response)
         this.loading = true
         this.$notify({
           title: '成功',
@@ -685,7 +660,7 @@ export default {
         return
       }
       deleteQue({ queId: this.examData.queId }).then(response => {
-        if (response.data === 1) {
+        if (response === 1) {
           this.$message({
             message: '删除成功',
             type: 'success'
@@ -933,27 +908,27 @@ export default {
 
       console.log('this examID:' + this.paraexam.examId)
       getOneQuestionByID(getToken(), this.paraexam).then(response => {
-        // console.log(':::'+response.data)
+        // console.log(':::'+response)
 
-        // for ( let ii = 0 ; ii < response.data.length; ii++) {
+        // for ( let ii = 0 ; ii < response.length; ii++) {
         // let jj = ii+1
-        // this.tongzhiOptions.push(response.data[ii].title)
+        // this.tongzhiOptions.push(response[ii].title)
 
-        console.log('______qqq@@@@@@@@@@@@' + response.data[0].questions.length)
+        console.log('______qqq@@@@@@@@@@@@' + response[0].questions.length)
 
-        this.examData.queContent = response.data[0].questions[0].queContent
-        console.log('______ccc@@@@@@@@@@@@:' + response.data[0].questions[0].queContent)
-        this.examData.queType = response.data[0].questions[0].queType
-        this.examData.queAnswer = response.data[0].questions[0].queAnswer
-        this.examData.queScore = response.data[0].questions[0].queScore
-        this.examData.choiceA = response.data[0].questions[0].choiceA
-        this.examData.choiceB = response.data[0].questions[0].choiceB
-        this.examData.choiceC = response.data[0].questions[0].choiceC
-        this.examData.choiceD = response.data[0].questions[0].choiceD
-        this.examData.choiceE = response.data[0].questions[0].choiceE
-        this.examData.choiceF = response.data[0].questions[0].choiceF
-        this.examData.choiceG = response.data[0].questions[0].choiceG
-        this.examData.choiceH = response.data[0].questions[0].choiceH
+        this.examData.queContent = response[0].questions[0].queContent
+        console.log('______ccc@@@@@@@@@@@@:' + response[0].questions[0].queContent)
+        this.examData.queType = response[0].questions[0].queType
+        this.examData.queAnswer = response[0].questions[0].queAnswer
+        this.examData.queScore = response[0].questions[0].queScore
+        this.examData.choiceA = response[0].questions[0].choiceA
+        this.examData.choiceB = response[0].questions[0].choiceB
+        this.examData.choiceC = response[0].questions[0].choiceC
+        this.examData.choiceD = response[0].questions[0].choiceD
+        this.examData.choiceE = response[0].questions[0].choiceE
+        this.examData.choiceF = response[0].questions[0].choiceF
+        this.examData.choiceG = response[0].questions[0].choiceG
+        this.examData.choiceH = response[0].questions[0].choiceH
 
         // console.log('return write time is:' + this.postForm.writeTime)
 
@@ -985,7 +960,7 @@ export default {
         this.postForm.summary = ''
         this.postForm.iStop = -1
         this.postForm.isFinish = -1
-        // this.examData.startDate = response.data.startDate
+        // this.examData.startDate = response.startDate
         this.changedExamData()
         return
       }
@@ -993,20 +968,20 @@ export default {
       this.parachuanru.examId = this.postForm.examId
       console.log('the shi juan ID:' + this.parachuanru.examId)
       getExamDetailSingle(getToken(), this.parachuanru).then(response => {
-        // console.log(':::'+response.data)
+        // console.log(':::'+response)
 
-        // for ( let ii = 0 ; ii < response.data.length; ii++) {
+        // for ( let ii = 0 ; ii < response.length; ii++) {
         // let jj = ii+1
-        // this.tongzhiOptions.push(response.data[ii].title)
+        // this.tongzhiOptions.push(response[ii].title)
 
-        // console.log('iii:'+response.data[ii].title)
+        // console.log('iii:'+response[ii].title)
 
-        this.postForm.title = response.data.examName
-        this.postForm.examLength = response.data.examLength
-        this.postForm.summary = response.data.info
-        this.postForm.iStop = parseInt(response.data.iStop)
-        this.postForm.isFinish = parseInt(response.data.isFinish)
-        this.postForm.startDate = response.data.startDate
+        this.postForm.title = response.examName
+        this.postForm.examLength = response.examLength
+        this.postForm.summary = response.info
+        this.postForm.iStop = parseInt(response.iStop)
+        this.postForm.isFinish = parseInt(response.isFinish)
+        this.postForm.startDate = response.startDate
         this.postForm.shijuanzhuangtai = this.stopNotice[parseInt(this.postForm.iStop) + 1].label
         this.postForm.shifoufabu = this.pubNotice[parseInt(this.postForm.isFinish) + 1].label
         let ss = []
@@ -1020,7 +995,7 @@ export default {
           this.postForm.display_time = new Date(parseInt(ss[0]), parseInt(ss[1]) - 1, parseInt(ss[2]))
           // this.postForm.writeTime = Date.parse(ss[0] + '-' + ss[1] + ss[2] )
         }
-        this.postForm.endDate = response.data.endDate
+        this.postForm.endDate = response.endDate
 
         console.log('the start date:' + this.postForm.startDate)
         console.log('the end date:' + this.postForm.endDate)
@@ -1051,15 +1026,15 @@ export default {
       // this.tongzhiOptions[1] = '请选择通知编号'
 
       getAllQuestionByID(getToken(), this.parachuanru).then(response => {
-        // console.log(':::'+response.data.length)
-        for (var ii = 0; ii < response.data.length; ii++) {
+        // console.log(':::'+response.length)
+        for (var ii = 0; ii < response.length; ii++) {
           // let jj = ii+1
           map = Object()
-          map.key = response.data[ii].queId
-          map.label = response.data[ii].queContent
+          map.key = response[ii].queId
+          map.label = response[ii].queContent
           this.timuSet.push(map)
 
-          // console.log('iii:'+response.data[ii].title)
+          // console.log('iii:'+response[ii].title)
         }
         // console.log('the tz length is:' + this.tongzhiOptions.length)
 
@@ -1073,15 +1048,15 @@ export default {
 
       this.parachuanru.examId = this.postForm.examId
       getInfo(getToken(), this.parachuanru).then(response => {
-        // console.log(':::'+response.data.length)
-        if (response.data) {
-          this.examAllInfo.examId = response.data.examId
-          this.examAllInfo.judgeExamScore = response.data.judgeExamScore
-          this.examAllInfo.judgeNumber = response.data.judgeNumber
-          this.examAllInfo.multipleExamScore = response.data.multipleExamScore
-          this.examAllInfo.multipleNumber = response.data.multipleNumber
-          this.examAllInfo.singleExamScore = response.data.singleExamScore
-          this.examAllInfo.singleNumber = response.data.singleNumber
+        // console.log(':::'+response.length)
+        if (response) {
+          this.examAllInfo.examId = response.examId
+          this.examAllInfo.judgeExamScore = response.judgeExamScore
+          this.examAllInfo.judgeNumber = response.judgeNumber
+          this.examAllInfo.multipleExamScore = response.multipleExamScore
+          this.examAllInfo.multipleNumber = response.multipleNumber
+          this.examAllInfo.singleExamScore = response.singleExamScore
+          this.examAllInfo.singleNumber = response.singleNumber
           console.log('获取 整体信息:' + this.examAllInfo.examId)
           const s1 = '' + (parseInt(this.examAllInfo.judgeNumber) + parseInt(this.examAllInfo.multipleNumber) + parseInt(this.examAllInfo.singleNumber)) + '试题 '
           const s2 = '' + (parseInt(this.examAllInfo.judgeExamScore) + parseInt(this.examAllInfo.multipleExamScore) + parseInt(this.examAllInfo.singleExamScore)) + '分'
@@ -1119,7 +1094,7 @@ export default {
     },
     fetchData(id) {
       fetchArticle(id).then(response => {
-        this.postForm = response.data
+        this.postForm = response
         // Just for test
         this.postForm.title += `   Article Id:${this.postForm.id}`
         this.postForm.summary += `   Article Id:${this.postForm.id}`
@@ -1137,7 +1112,6 @@ export default {
     },
     insertQuestion(value) {
       insertQue(getToken(), value).then(response => {
-        console.log(response.data)
         this.loading = true
         this.$notify({
           title: '成功',
@@ -1152,20 +1126,13 @@ export default {
         this.$notify({
           title: '失败',
           message: '创建试卷失败',
-          type: 'success',
+          type: 'error',
           duration: 2000
         })
       })
     },
     submitForm() {
       this.canInsertQue = true
-      console.log('the title is:' + this.postForm.title)
-      // this.postForm.display_time = parseInt(this.display_time / 1000)
-      console.log('the startdate is:' + this.postForm.startDate)
-      console.log('the endDate is:' + this.postForm.endDate)
-      console.log('the examLength is:' + this.postForm.examLength)
-      console.log('the info is:' + this.postForm.summary)
-
       this.chuanru.examName = this.postForm.title
       this.chuanru.startDate = this.postForm.startDate
       this.chuanru.endDate = this.postForm.endDate
@@ -1205,7 +1172,6 @@ export default {
         })
         return
       }
-
       if ((this.examData.queScore.length === 0) || isNaN(this.examData.queScore)) {
         this.$message({
           message: '请填写题目分值',
@@ -1237,7 +1203,7 @@ export default {
 
           this.$message({
             message: '插入试题成功',
-            type: 'warning'
+            type: 'success'
           })
           return
         } else {
@@ -1361,15 +1327,15 @@ export default {
     freshQue() {
       this.parachuanru.examId = this.postForm.examId
       getInfo(getToken(), this.parachuanru).then(response => {
-        // console.log(':::'+response.data.length)
-        if (response.data) {
-          this.examAllInfo.examId = response.data.examId
-          this.examAllInfo.judgeExamScore = response.data.judgeExamScore
-          this.examAllInfo.judgeNumber = response.data.judgeNumber
-          this.examAllInfo.multipleExamScore = response.data.multipleExamScore
-          this.examAllInfo.multipleNumber = response.data.multipleNumber
-          this.examAllInfo.singleExamScore = response.data.singleExamScore
-          this.examAllInfo.singleNumber = response.data.singleNumber
+        // console.log(':::'+response.length)
+        if (response) {
+          this.examAllInfo.examId = response.examId
+          this.examAllInfo.judgeExamScore = response.judgeExamScore
+          this.examAllInfo.judgeNumber = response.judgeNumber
+          this.examAllInfo.multipleExamScore = response.multipleExamScore
+          this.examAllInfo.multipleNumber = response.multipleNumber
+          this.examAllInfo.singleExamScore = response.singleExamScore
+          this.examAllInfo.singleNumber = response.singleNumber
           console.log('获取 整体信息:' + this.examAllInfo.examId)
           const s1 = '' + (parseInt(this.examAllInfo.judgeNumber) + parseInt(this.examAllInfo.multipleNumber) + parseInt(this.examAllInfo.singleNumber)) + '试题 '
           const s2 = '' + (parseInt(this.examAllInfo.judgeExamScore) + parseInt(this.examAllInfo.multipleExamScore) + parseInt(this.examAllInfo.singleExamScore)) + '分'
@@ -1396,15 +1362,15 @@ export default {
       // this.tongzhiOptions[1] = '请选择通知编号'
 
       getAllQuestionByID(getToken(), this.parachuanru).then(response => {
-        // console.log(':::'+response.data.length)
-        for (var ii = 0; ii < response.data.length; ii++) {
+        // console.log(':::'+response.length)
+        for (var ii = 0; ii < response.length; ii++) {
           // let jj = ii+1
           map = Object()
-          map.key = response.data[ii].queId
-          map.label = response.data[ii].queContent
+          map.key = response[ii].queId
+          map.label = response[ii].queContent
           this.timuSet.push(map)
 
-          // console.log('iii:'+response.data[ii].title)
+          // console.log('iii:'+response[ii].title)
         }
         // console.log('the tz length is:' + this.tongzhiOptions.length)
 
@@ -1434,8 +1400,8 @@ export default {
     },
     getRemoteUserList(query) {
       userSearch(query).then(response => {
-        if (!response.data.items) return
-        this.userListOptions = response.data.items.map(v => v.name)
+        if (!response.items) return
+        this.userListOptions = response.items.map(v => v.name)
       })
     }
   }

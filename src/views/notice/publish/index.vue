@@ -85,7 +85,7 @@ const defaultForm = {
   display_time: undefined, // 前台展示时间
   id: undefined,
   tongzhiId: 0,
-  platforms: ['a-platform'],
+  // platforms: ['a-platform'],
   comment_disabled: false,
   importance: 0
 }
@@ -118,9 +118,10 @@ export default {
   },
   methods: {
     submitForm() {
-      this.postForm.url = this.postForm.image_uri
-      console.log(this.postForm)
-      insertNotice(this.postForm).then(response => {
+      const params = Object.assign({}, this.postForm)
+      params.src = this.postForm.source_uri
+      params.url = this.postForm.image_uri
+      insertNotice(params).then(response => {
         this.loading = true
         this.$notify({
           title: '成功',

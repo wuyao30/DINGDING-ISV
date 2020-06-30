@@ -10,7 +10,7 @@ export function login(data) {
 
 export function loginByCode(code) {
   return request({
-    url: '/token/enter',
+    url: 'http://39.98.194.195:8090/token/enter',
     method: 'get',
     params: { code: code.code }
   })
@@ -18,7 +18,7 @@ export function loginByCode(code) {
 
 export function getInfo(token) {
   return request({
-    url: '/token/userinfo',
+    url: 'http://39.98.194.195:8090/token/userinfo',
     method: 'get',
     params: { token }
   })

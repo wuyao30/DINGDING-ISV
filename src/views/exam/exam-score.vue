@@ -194,7 +194,7 @@ export default {
   created() {
     // this.getList()
     getExamNames().then(response => {
-      this.examName = response.data
+      this.examName = response
     })
   },
   methods: {
@@ -209,12 +209,12 @@ export default {
     handleFilter() {
       this.listQuery.page = 1
       findByListquery(this.listQuery).then(response => {
-        this.list = response.data
+        this.list = response
       })
     },
     _getSuggest() {
       findByListquery(this.listQuery).then(response => {
-        this.list = response.data
+        this.list = response
       })
     },
     handleModifyStatus(row, status) {
@@ -320,7 +320,7 @@ export default {
     },
     handleFetchPv(pv) {
       // fetchPv(pv).then(response => {
-      //   this.pvData = response.data.pvData
+      //   this.pvData = response.pvData
       //   this.dialogPvVisible = true
       // })
     },

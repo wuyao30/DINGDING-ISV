@@ -15,14 +15,14 @@
         <el-row :gutter="20">
           <el-col :span="6">
             <el-form-item label-width="80px" label="通知类型:" class="postInfo-container-item">
-              <el-select v-model="parachuanru.type" :placeholder="请选择" clearable class="filter-item" @change="tongzhileixing">
+              <el-select v-model="parachuanru.type" placeholder="请选择" clearable class="filter-item" @change="tongzhileixing">
                 <el-option v-for="item in noticeOptions" :key="item.key" :label="item.label" :value="item.key" />
               </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="6">
             <el-form-item label-width="80px" label="通知序号:" class="postInfo-container-item">
-              <el-select ref="selecttz" v-model="parachuanru.id" :placeholder="请选择" clearable class="filter-item" @change="tongzhixuhao">
+              <el-select ref="selecttz" v-model="parachuanru.id" placeholder="请选择" clearable class="filter-item" @change="tongzhixuhao">
                 <el-option v-for="(elem,index) of tongzhiOptions" :key="index" :label="elem.label" :value="elem.key" />
               </el-select>
             </el-form-item>
@@ -30,13 +30,13 @@
 
           <el-col :span="6">
             <el-form-item label-width="80px" label="发布人员:" class="postInfo-container-item">
-              <el-input v-model="postForm.writeUser" :placeholder="发布人员" required />
+              <el-input v-model="postForm.writeUser" placeholder="发布人员" required />
             </el-form-item>
           </el-col>
 
           <el-col :span="6">
             <el-form-item label-width="80px" label="发布时间:" class="postInfo-container-item">
-              <el-date-picker v-model="postForm.display_time" type="date" placeholder="选择日期时间" @change="changeEnd" />
+              <el-date-picker v-model="postForm.writeTime" type="date" placeholder="选择日期时间" @change="changeEnd" />
             </el-form-item>
           </el-col>
 
@@ -209,7 +209,6 @@ export default {
         this.canMod = false
       } else {
         this.canMod = true
-        console.log('xxxxx00000')
         this.$refs.editor.setContent('')
         this.postForm.importance = 0
         this.postForm.writeUser = ''
@@ -217,28 +216,14 @@ export default {
         this.postForm.summary = ''
         return
       }
-      console.log('the id is:' + this.parachuanru.id)
       getNotice(getToken(), this.parachuanru).then(response => {
-        // console.log(':::'+ response.data.length)
-        this.postForm.importance = response.data[0].importance
-        this.postForm.writeUser = response.data[0].writeUser
-        this.postForm.title = response.data[0].title
-        this.postForm.summary = response.data[0].summary
-        this.postForm.infoContent = response.data[0].infoContent
+        this.postForm.importance = response[0].importance
+        this.postForm.writeUser = response[0].writeUser
+        this.postForm.title = response[0].title
+        this.postForm.summary = response[0].summary
+        this.postForm.infoContent = response[0].infoContent
         this.$refs.editor.setContent(this.postForm.infoContent)
-        this.postForm.writeTime = response.data[0].writeTime
-        // if (this.postForm.writeTime.length >= 8) {
-        //   ss = this.postForm.writeTime.split('-')
-        //   console.log('return write time ss0:' + ss[0])
-        //   console.log('return write time ss1:' + ss[1])
-        //   console.log('return write time ss2:' + ss[2])
-        //   this.postForm.display_time = new Date(parseInt(ss[0]), parseInt(ss[1]) - 1, parseInt(ss[2]))
-        //   this.postForm.writeTime = Date.parse(ss[0] + '-' + ss[1] + ss[2] )
-        // }
-        console.log('return write time is:' + this.postForm.writeTime)
-        for (let kk = 0; kk < this.tongzhiOptions.length; kk++) {
-          console.log('hello')
-        }
+        this.postForm.writeTime = response[0].writeTime
       }).catch(e => {
         console.log(e)
         console.log('获取通知ID错误')
@@ -269,22 +254,20 @@ export default {
       this.tongzhiOptions = []
       this.tongzhiOptions[0] = map
       getNotice(getToken(), this.parachuanru).then(response => {
-        for (var ii = 0; ii < response.data.length; ii++) {
+        for (var ii = 0; ii < response.length; ii++) {
           map = Object()
-          map.key = response.data[ii].id
-          map.label = response.data[ii].title
+          map.key = response[ii].id
+          map.label = response[ii].title
           this.tongzhiOptions.push(map)
         }
-        // for (let kk = 0; kk < this.tongzhiOptions.length; kk++) {
-        // }
       }).catch(() => {
         console.log('获取通知ID错误')
       })
     },
     changeEnd() {
-      const strYear = String(this.postForm.display_time.getFullYear())
-      const strMonth = String(this.postForm.display_time.getMonth() + 1)
-      const strDay = String(this.postForm.display_time.getDate())
+      const strYear = String(this.postForm.writeTime.getFullYear())
+      const strMonth = String(this.postForm.writeTime.getMonth() + 1)
+      const strDay = String(this.postForm.writeTime.getDate())
       const strM = strMonth.valueOf().padStart(2, '0')
       const strD = strDay.valueOf().padStart(2, '0')
       this.postForm.writeTime = strYear.valueOf() + '-' + strM + '-' + strD
@@ -292,7 +275,7 @@ export default {
     },
     fetchData(id) {
       fetchArticle(id).then(response => {
-        this.postForm = response.data
+        this.postForm = response
         // Just for test
         this.postForm.title += `   Article Id:${this.postForm.id}`
         this.postForm.summary += `   Article Id:${this.postForm.id}`
@@ -372,7 +355,6 @@ export default {
         return
       }
       updateNotice(getToken(), this.chuanru).then(response => {
-        console.log(response.data)
         this.loading = true
         this.$notify({
           title: '成功',
@@ -404,7 +386,7 @@ export default {
       // console.log('the type is:'+this.postForm.noticetype
       deleteNotice(getToken(), this.chuanru).then(
         response => {
-          console.log(response.data)
+          console.log(response)
           this.loading = true
           this.$notify({
             title: '成功',
@@ -441,8 +423,8 @@ export default {
     },
     getRemoteUserList(query) {
       userSearch(query).then(response => {
-        if (!response.data.items) return
-        this.userListOptions = response.data.items.map(v => v.name)
+        if (!response.items) return
+        this.userListOptions = response.items.map(v => v.name)
       })
     }
   }

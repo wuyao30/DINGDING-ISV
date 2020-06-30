@@ -6,7 +6,7 @@ export function loginByUsername(username, password) {
     password
   }
   return request({
-    url: 'http://118.190.175.198:8081/token',
+    url: 'http://39.98.194.195:8090/token',
     method: 'post',
     data
   })
@@ -21,158 +21,142 @@ export function loginByCode(code) {
 
 export function logout() {
   return request({
-    url: 'http://118.190.175.198:8081/token',
+    url: 'http://39.98.194.195:8090/token',
     method: 'delete'
   })
 }
 
 export function getUserInfo(token) {
   return request({
-    url: 'http://118.190.175.198:8081/getinfo',
-    method: 'get',
-    headers: { 'Authorization': 'Bearer ' + token }
+    url: 'http://39.98.194.195:8090/getinfo',
+    method: 'get'
   })
 }
 
 export function getExamInfo(token) {
   return request({
-    url: 'http://118.190.175.198:8081/exam/examinfo',
-    method: 'get',
-    headers: { 'Authorization': 'Bearer ' + token }
+    url: 'http://39.98.194.195:8090/exam/examinfo',
+    method: 'get'
   })
 }
 
 export function getInfo(token, data) {
   return request({
-    url: 'http://118.190.175.198:8081/exam/info',
+    url: 'http://39.98.194.195:8090/exam/info',
     method: 'post',
-    headers: { 'Authorization': 'Bearer ' + token },
     data
   })
 }
 
 export function getOneQuestionByID(token, data) {
   return request({
-    url: 'http://118.190.175.198:8081/exam/quebyid',
+    url: 'http://39.98.194.195:8090/exam/quebyid',
     method: 'post',
-    headers: { 'Authorization': 'Bearer ' + token },
     data
   })
 }
 
 export function getAllQuestionByID(token, data) {
   return request({
-    url: 'http://118.190.175.198:8081/exam/questionbyid',
+    url: 'http://39.98.194.195:8090/exam/questionbyid',
     method: 'post',
-    headers: { 'Authorization': 'Bearer ' + token },
     data
   })
 }
 
 export function getExamDetailSingle(token, data) {
   return request({
-    url: 'http://118.190.175.198:8081/exam/quebyexamid',
+    url: 'http://39.98.194.195:8090/exam/quebyexamid',
     method: 'post',
-    headers: { 'Authorization': 'Bearer ' + token },
     data
   })
 }
 
 export function insertExample(token, data) {
   return request({
-    url: 'http://118.190.175.198:8081/exam/insertexam',
+    url: 'http://39.98.194.195:8090/exam/insertexam',
     method: 'post',
-    headers: { 'Authorization': 'Bearer ' + token },
     data
   })
 }
 
 export function deleteExam(token, data) {
   return request({
-    url: 'http://118.190.175.198:8081/exam/deleteExam',
+    url: 'http://39.98.194.195:8090/exam/deleteExam',
     method: 'post',
-    headers: { 'Authorization': 'Bearer ' + token },
     data
   })
 }
 
 export function insertQue(token, data) {
   return request({
-    url: 'http://118.190.175.198:8081/exam/insertque',
+    url: 'http://39.98.194.195:8090/exam/insertque',
     method: 'post',
-    headers: { 'Authorization': 'Bearer ' + token },
     data
   })
 }
 
 export function insertNotice(token, data) {
   return request({
-    url: 'http://118.190.175.198:8081/F',
+    url: 'http://39.98.194.195:8090/test/notice',
     method: 'post',
-    headers: { 'Authorization': 'Bearer ' + token },
     data
   })
 }
 
 export function updateNotice(token, data) {
   return request({
-    url: 'http://118.190.175.198:8081/test/upnotice',
+    url: 'http://39.98.194.195:8090/test/upnotice',
     method: 'post',
-    headers: { 'Authorization': 'Bearer ' + token },
     data
   })
 }
 
 export function updateQue(token, data) {
   return request({
-    url: 'http://118.190.175.198:8081/exam/updateque',
+    url: 'http://39.98.194.195:8090/exam/updateque',
     method: 'post',
-    headers: { 'Authorization': 'Bearer ' + token },
     data
   })
 }
 
 export function updateExam(token, data) {
   return request({
-    url: 'http://118.190.175.198:8081/exam/updateexam',
+    url: 'http://39.98.194.195:8090/exam/updateexam',
     method: 'post',
-    headers: { 'Authorization': 'Bearer ' + token },
     data
   })
 }
 
 export function getReport01(token, data) {
   return request({
-    url: 'http://118.190.175.198:8081/test/page',
+    url: 'http://39.98.194.195:8090/test/page',
     method: 'post',
-    headers: { 'Authorization': 'Bearer ' + token },
     data
   })
 }
 
 export function getNotice(token, data) {
   return request({
-    url: 'http://118.190.175.198:8081/test/defnotice',
+    url: 'http://39.98.194.195:8090/test/defnotice',
     method: 'post',
-    headers: { 'Authorization': 'Bearer ' + token },
     data
   })
 }
 
 export function getNoticeType(token, data) {
   return request({
-    url: 'http://118.190.175.198:8081/test/appnoticetype',
+    url: 'http://39.98.194.195:8090/test/appnoticetype',
     method: 'post',
-    headers: { 'Authorization': 'Bearer ' + token },
     data
   })
 }
 
 export function upLoadExecl(token, data) {
   return request({
-    url: 'http://118.190.175.198:8081/file/modfile',
+    url: 'http://39.98.194.195:8090/file/modfile',
     method: 'post',
-    headers: { 'Content-Type': 'multipart/form-data', 'Authorization': 'Bearer ' + token },
+    headers: { 'Content-Type': 'multipart/form-data' },
     data
   })
 }
@@ -182,9 +166,9 @@ export function downloadExecl(token, fileName) {
     fileName
   }
   return request({
-    url: 'http://118.190.175.198:8081/file/download',
+    url: 'http://39.98.194.195:8090/file/download',
     method: 'post',
-    headers: { 'Authorization': 'Bearer ' + token, 'Access-Control-Allow-Origin': '*' },
+    headers: { 'Access-Control-Allow-Origin': '*' },
     responseType: 'blob',
     data
   })
@@ -197,75 +181,68 @@ export function upLoadNoticeFile(token, filename) {
   return request({
     url: 'http://www.yixiaoshenghua.top:8080/xuzhou/file',
     method: 'post',
-    headers: { 'Content-Type': 'multipart/form-data', 'Authorization': 'Bearer ' + token },
+    headers: { 'Content-Type': 'multipart/form-data' },
     data
   })
 }
 
 export function Reader(token, data) {
   return request({
-    url: 'http://118.190.175.198:8081/reader',
+    url: 'http://39.98.194.195:8090/reader',
     method: 'post',
-    headers: { 'Authorization': 'Bearer ' + token },
     data
   })
 }
 
 export function NoReader(token, data) {
   return request({
-    url: 'http://118.190.175.198:8081/noreader',
+    url: 'http://39.98.194.195:8090/noreader',
     method: 'post',
-    headers: { 'Authorization': 'Bearer ' + token },
     data
   })
 }
 
 export function ExamRead(token, data) {
   return request({
-    url: 'http://118.190.175.198:8081/examread',
+    url: 'http://39.98.194.195:8090/examread',
     method: 'post',
-    headers: { 'Authorization': 'Bearer ' + token },
     data
   })
 }
 
 export function ExamNoRead(token, data) {
   return request({
-    url: 'http://118.190.175.198:8081/examnoread',
+    url: 'http://39.98.194.195:8090/examnoread',
     method: 'post',
-    headers: { 'Authorization': 'Bearer ' + token },
     data
   })
 }
 
 export function querySwiper(token) {
   return request({
-    url: 'http://118.190.175.198:8081/test/appswiper',
-    method: 'get',
-    headers: { 'Authorization': 'Bearer ' + token }
-
+    url: 'http://39.98.194.195:8090/test/appswiper',
+    method: 'get'
   })
 }
 
 export function deleteNotice(token, data) {
   return request({
-    url: 'http://118.190.175.198:8081/test/deleteNotice',
+    url: 'http://39.98.194.195:8090/test/deleteNotice',
     method: 'post',
-    headers: { 'Authorization': 'Bearer ' + token },
     data
   })
 }
 
 export function getSurveyInfo() {
   return request({
-    url: 'http://118.190.175.198:8081/survey/info',
+    url: 'http://39.98.194.195:8090/survey/info',
     method: 'get'
   })
 }
 
 export function getSurveyDetail(id) {
   return request({
-    url: 'http://118.190.175.198:8081/survey/surveyDetail',
+    url: 'http://39.98.194.195:8090/survey/surveyDetail',
     method: 'get',
     params: { id }
   })
@@ -273,87 +250,78 @@ export function getSurveyDetail(id) {
 
 export function insertSurvey(token, data) {
   return request({
-    url: 'http://118.190.175.198:8081/survey/insert',
+    url: 'http://39.98.194.195:8090/survey/insert',
     method: 'post',
-    headers: { 'Authorization': 'Bearer ' + token },
     data
   })
 }
 
 export function updateSurvey(token, data) {
   return request({
-    url: 'http://118.190.175.198:8081/survey/update',
+    url: 'http://39.98.194.195:8090/survey/update',
     method: 'post',
-    headers: { 'Authorization': 'Bearer ' + token },
     data
   })
 }
 
 export function deleteSurveyById(token, id) {
   return request({
-    url: 'http://118.190.175.198:8081/survey/delete',
+    url: 'http://39.98.194.195:8090/survey/delete',
     method: 'get',
-    headers: { 'Authorization': 'Bearer ' + token },
     params: { id }
   })
 }
 
 export function getSurveyItemDetail(sid) {
   return request({
-    url: 'http://118.190.175.198:8081/item/queryAll',
+    url: 'http://39.98.194.195:8090/item/queryAll',
     method: 'get',
-    // headers: { 'Authorization': 'Bearer ' + token },
     params: { sid }
   })
 }
 
 export function getSurveyItemDetailById(id) {
   return request({
-    url: 'http://118.190.175.198:8081/item/query',
+    url: 'http://39.98.194.195:8090/item/query',
     method: 'get',
-    // headers: { 'Authorization': 'Bearer ' + token },
     params: { id }
   })
 }
 
 export function insertSurveyItemDetail(data) {
   return request({
-    url: 'http://118.190.175.198:8081/item/insert',
+    url: 'http://39.98.194.195:8090/item/insert',
     method: 'post',
-    // headers: { 'Authorization': 'Bearer ' + token },
     data
   })
 }
 
 export function deleteSurveyItem(id) {
   return request({
-    url: 'http://118.190.175.198:8081/item/delete',
+    url: 'http://39.98.194.195:8090/item/delete',
     method: 'get',
-    // headers: { 'Authorization': 'Bearer ' + token },
     params: { id }
   })
 }
 
 export function querySurveyResult(sid) {
   return request({
-    url: 'http://118.190.175.198:8081/survey/chart',
+    url: 'http://39.98.194.195:8090/survey/chart',
     method: 'get',
-    // headers: { 'Authorization': 'Bearer ' + token },
     params: { sid }
   })
 }
 
 export function queryAllSurvey() {
   return request({
-    url: 'http://118.190.175.198:8081/survey/info',
+    url: 'http://39.98.194.195:8090/survey/info',
     method: 'get'
-    // headers: { 'Authorization': 'Bearer ' + token },
   })
 }
 
 export function deleteQue(data) {
   return request({
-    url: 'http://localhost:8081/exam/deleteque',
+    url: 'http://39.98.194.195:8090/exam/deleteque',
     method: 'post',
     data
   })

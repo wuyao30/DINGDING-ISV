@@ -316,13 +316,13 @@ export default {
     //  this.stopNotice = Object.assign({}, this.stopNotice)
     //   this.$set(this.pubNotice,this.pubNotice,'')
     getExamInfo(getToken()).then(response => {
-      for (var ii = 0; ii < response.data.length; ii++) {
+      for (var ii = 0; ii < response.length; ii++) {
         map = Object()
-        map.key = response.data[ii].examId
-        map.label = response.data[ii].examName
+        map.key = response[ii].examId
+        map.label = response[ii].examName
         this.noticeOptions.push(map)
 
-        // console.log('iii:'+response.data[ii].title)
+        // console.log('iii:'+response[ii].title)
       }
       // console.log('the tz length is:' + this.tongzhiOptions.length)
 
@@ -368,15 +368,15 @@ export default {
       this.parachuanru.examId = this.postForm.examId
       console.log('the shi juan ID:' + this.parachuanru.examId)
       getExamDetailSingle(getToken(), this.parachuanru).then(response => {
-        this.postForm.title = response.data.examName
-        this.postForm.examLength = response.data.examLength
-        this.postForm.summary = response.data.info
-        this.chuanru.iStop = response.data.iStop
-        this.chuanru.isFinish = response.data.isFinish
-        this.postForm.iStop = parseInt(response.data.iStop)
-        this.postForm.isFinish = parseInt(response.data.isFinish)
-        this.postForm.startDate = response.data.startDate
-        this.postForm.endDate = response.data.endDate
+        this.postForm.title = response.examName
+        this.postForm.examLength = response.examLength
+        this.postForm.summary = response.info
+        this.chuanru.iStop = response.iStop
+        this.chuanru.isFinish = response.isFinish
+        this.postForm.iStop = parseInt(response.iStop)
+        this.postForm.isFinish = parseInt(response.isFinish)
+        this.postForm.startDate = response.startDate
+        this.postForm.endDate = response.endDate
         let ss = []
 
         // stopNotice pubNotice
@@ -395,7 +395,7 @@ export default {
           this.postForm.display_time = new Date(parseInt(ss[0]), parseInt(ss[1]) - 1, parseInt(ss[2]))
           // this.postForm.writeTime = Date.parse(ss[0] + '-' + ss[1] + ss[2] )
         }
-        this.postForm.endDate = response.data.endDate
+        this.postForm.endDate = response.endDate
 
         console.log('the start date:' + this.postForm.startDate)
         console.log('the end date:' + this.postForm.endDate)
@@ -426,15 +426,15 @@ export default {
       // this.tongzhiOptions[1] = '请选择通知编号'
 
       getAllQuestionByID(getToken(), this.parachuanru).then(response => {
-        // console.log(':::'+response.data.length)
-        for (var ii = 0; ii < response.data.length; ii++) {
+        // console.log(':::'+response.length)
+        for (var ii = 0; ii < response.length; ii++) {
           // let jj = ii+1
           map = Object()
-          map.key = response.data[ii].queId
-          map.label = response.data[ii].queContent
+          map.key = response[ii].queId
+          map.label = response[ii].queContent
           this.timuSet.push(map)
 
-          // console.log('iii:'+response.data[ii].title)
+          // console.log('iii:'+response[ii].title)
         }
         // console.log('the tz length is:' + this.tongzhiOptions.length)
 
@@ -448,15 +448,15 @@ export default {
 
       this.parachuanru.examId = this.postForm.examId
       getInfo(getToken(), this.parachuanru).then(response => {
-        // console.log(':::'+response.data.length)
-        if (response.data) {
-          this.examAllInfo.examId = response.data.examId
-          this.examAllInfo.judgeExamScore = response.data.judgeExamScore
-          this.examAllInfo.judgeNumber = response.data.judgeNumber
-          this.examAllInfo.multipleExamScore = response.data.multipleExamScore
-          this.examAllInfo.multipleNumber = response.data.multipleNumber
-          this.examAllInfo.singleExamScore = response.data.singleExamScore
-          this.examAllInfo.singleNumber = response.data.singleNumber
+        // console.log(':::'+response.length)
+        if (response) {
+          this.examAllInfo.examId = response.examId
+          this.examAllInfo.judgeExamScore = response.judgeExamScore
+          this.examAllInfo.judgeNumber = response.judgeNumber
+          this.examAllInfo.multipleExamScore = response.multipleExamScore
+          this.examAllInfo.multipleNumber = response.multipleNumber
+          this.examAllInfo.singleExamScore = response.singleExamScore
+          this.examAllInfo.singleNumber = response.singleNumber
           console.log('获取 整体信息:' + this.examAllInfo.examId)
           const s1 = '' + (parseInt(this.examAllInfo.judgeNumber) + parseInt(this.examAllInfo.multipleNumber) + parseInt(this.examAllInfo.singleNumber)) + '试题 '
           const s2 = '' + (parseInt(this.examAllInfo.judgeExamScore) + parseInt(this.examAllInfo.multipleExamScore) + parseInt(this.examAllInfo.singleExamScore)) + '分'
@@ -485,27 +485,27 @@ export default {
 
         console.log('this examID:' + this.paraexam.examId)
         getOneQuestionByID(getToken(), this.paraexam).then(response => {
-          // console.log(':::'+response.data)
+          // console.log(':::'+response)
 
-          // for ( let ii = 0 ; ii < response.data.length; ii++) {
+          // for ( let ii = 0 ; ii < response.length; ii++) {
           // let jj = ii+1
-          // this.tongzhiOptions.push(response.data[ii].title)
+          // this.tongzhiOptions.push(response[ii].title)
 
-          console.log('______qqq@@@@@@@@@@@@' + response.data[0].questions.length)
+          console.log('______qqq@@@@@@@@@@@@' + response[0].questions.length)
 
-          this.postForm.queContent = response.data[0].questions[0].queContent
-          console.log('______ccc@@@@@@@@@@@@:' + response.data[0].questions[0].queContent)
-          this.postForm.queType = response.data[0].questions[0].queType
-          this.postForm.queAnswer = response.data[0].questions[0].queAnswer
-          this.postForm.queScore = response.data[0].questions[0].queScore
-          this.postForm.choiceA = response.data[0].questions[0].choiceA
-          this.postForm.choiceB = response.data[0].questions[0].choiceB
-          this.postForm.choiceC = response.data[0].questions[0].choiceC
-          this.postForm.choiceD = response.data[0].questions[0].choiceD
-          this.postForm.choiceE = response.data[0].questions[0].choiceE
-          this.postForm.choiceF = response.data[0].questions[0].choiceF
-          this.postForm.choiceG = response.data[0].questions[0].choiceG
-          this.postForm.choiceH = response.data[0].questions[0].choiceH
+          this.postForm.queContent = response[0].questions[0].queContent
+          console.log('______ccc@@@@@@@@@@@@:' + response[0].questions[0].queContent)
+          this.postForm.queType = response[0].questions[0].queType
+          this.postForm.queAnswer = response[0].questions[0].queAnswer
+          this.postForm.queScore = response[0].questions[0].queScore
+          this.postForm.choiceA = response[0].questions[0].choiceA
+          this.postForm.choiceB = response[0].questions[0].choiceB
+          this.postForm.choiceC = response[0].questions[0].choiceC
+          this.postForm.choiceD = response[0].questions[0].choiceD
+          this.postForm.choiceE = response[0].questions[0].choiceE
+          this.postForm.choiceF = response[0].questions[0].choiceF
+          this.postForm.choiceG = response[0].questions[0].choiceG
+          this.postForm.choiceH = response[0].questions[0].choiceH
 
         // console.log('return write time is:' + this.postForm.writeTime)
 
@@ -560,22 +560,22 @@ export default {
       this.parachuanru.examId = this.postForm.examId
       console.log('the shi juan ID:' + this.parachuanru.examId)
       getExamDetailSingle(getToken(), this.parachuanru).then(response => {
-        // console.log(':::'+response.data)
+        // console.log(':::'+response)
 
-        // for ( let ii = 0 ; ii < response.data.length; ii++) {
+        // for ( let ii = 0 ; ii < response.length; ii++) {
         // let jj = ii+1
-        // this.tongzhiOptions.push(response.data[ii].title)
+        // this.tongzhiOptions.push(response[ii].title)
 
-        // console.log('iii:'+response.data[ii].title)
+        // console.log('iii:'+response[ii].title)
 
-        this.postForm.title = response.data.examName
-        this.postForm.examLength = response.data.examLength
-        this.postForm.summary = response.data.info
-        this.chuanru.iStop = response.data.iStop
-        this.chuanru.isFinish = response.data.isFinish
-        this.iStop = parseInt(response.data.iStop)
-        this.isFinish = parseInt(response.data.isFinish)
-        this.postForm.startDate = response.data.startDate
+        this.postForm.title = response.examName
+        this.postForm.examLength = response.examLength
+        this.postForm.summary = response.info
+        this.chuanru.iStop = response.iStop
+        this.chuanru.isFinish = response.isFinish
+        this.iStop = parseInt(response.iStop)
+        this.isFinish = parseInt(response.isFinish)
+        this.postForm.startDate = response.startDate
         let ss = []
 
         // stopNotice pubNotice
@@ -592,7 +592,7 @@ export default {
           this.postForm.display_time = new Date(parseInt(ss[0]), parseInt(ss[1]) - 1, parseInt(ss[2]))
           // this.ostForm.writeTime = Date.parse(ss[0] + '-' + ss[1] + ss[2] )
         }
-        this.postForm.endDate = response.data.endDate
+        this.postForm.endDate = response.endDate
 
         console.log('the start date:' + this.postForm.startDate)
         console.log('the end date:' + this.postForm.endDate)
@@ -616,15 +616,15 @@ export default {
       // this.tongzhiOptions[1] = '请选择通知编号'
 
       getAllQuestionByID(getToken(), this.parachuanru).then(response => {
-        // console.log(':::'+response.data.length)
-        for (var ii = 0; ii < response.data.length; ii++) {
+        // console.log(':::'+response.length)
+        for (var ii = 0; ii < response.length; ii++) {
           // let jj = ii+1
           map = Object()
-          map.key = response.data[ii].queId
-          map.label = response.data[ii].queContent
+          map.key = response[ii].queId
+          map.label = response[ii].queContent
           this.timuSet.push(map)
 
-          // console.log('iii:'+response.data[ii].title)
+          // console.log('iii:'+response[ii].title)
         }
         // console.log('the tz length is:' + this.tongzhiOptions.length)
 
@@ -638,15 +638,15 @@ export default {
 
       this.parachuanru.examId = this.postForm.examId
       getInfo(getToken(), this.parachuanru).then(response => {
-        // console.log(':::'+response.data.length)
-        if (response.data) {
-          this.examAllInfo.examId = response.data.examId
-          this.examAllInfo.judgeExamScore = response.data.judgeExamScore
-          this.examAllInfo.judgeNumber = response.data.judgeNumber
-          this.examAllInfo.multipleExamScore = response.data.multipleExamScore
-          this.examAllInfo.multipleNumber = response.data.multipleNumber
-          this.examAllInfo.singleExamScore = response.data.singleExamScore
-          this.examAllInfo.singleNumber = response.data.singleNumber
+        // console.log(':::'+response.length)
+        if (response) {
+          this.examAllInfo.examId = response.examId
+          this.examAllInfo.judgeExamScore = response.judgeExamScore
+          this.examAllInfo.judgeNumber = response.judgeNumber
+          this.examAllInfo.multipleExamScore = response.multipleExamScore
+          this.examAllInfo.multipleNumber = response.multipleNumber
+          this.examAllInfo.singleExamScore = response.singleExamScore
+          this.examAllInfo.singleNumber = response.singleNumber
           console.log('获取 整体信息:' + this.examAllInfo.examId)
           const s1 = '' + (parseInt(this.examAllInfo.judgeNumber) + parseInt(this.examAllInfo.multipleNumber) + parseInt(this.examAllInfo.singleNumber)) + '试题 '
           const s2 = '' + (parseInt(this.examAllInfo.judgeExamScore) + parseInt(this.examAllInfo.multipleExamScore) + parseInt(this.examAllInfo.singleExamScore)) + '分'
@@ -684,7 +684,7 @@ export default {
     },
     fetchData(id) {
       fetchArticle(id).then(response => {
-        this.postForm = response.data
+        this.postForm = response
         // Just for test
         this.postForm.title += `   Article Id:${this.postForm.id}`
         this.postForm.summary += `   Article Id:${this.postForm.id}`
@@ -720,7 +720,6 @@ export default {
           this.loading = false
         })
         .catch(() => {
-          console.log('发布试卷错误')
           this.$notify({
             title: '失败',
             message: '删除试卷失败',
@@ -728,6 +727,7 @@ export default {
             duration: 2000
           })
         })
+      this.postForm = {}
     },
     modifyExam(value) {
       this.chuanru.examId = this.postForm.examId
@@ -777,7 +777,7 @@ export default {
         return
       }
       updateExam(getToken(), this.chuanru).then(response => {
-        console.log(response.data)
+        console.log(response)
         this.loading = true
         this.$notify({
           title: '成功',
@@ -847,7 +847,7 @@ export default {
       }
 
       insertExample(getToken(), this.chuanru).then(response => {
-        console.log(response.data)
+        console.log(response)
         this.loading = true
         this.$notify({
           title: '成功',
@@ -885,8 +885,8 @@ export default {
     },
     getRemoteUserList(query) {
       userSearch(query).then(response => {
-        if (!response.data.items) return
-        this.userListOptions = response.data.items.map(v => v.name)
+        if (!response.items) return
+        this.userListOptions = response.items.map(v => v.name)
       })
     }
   }
