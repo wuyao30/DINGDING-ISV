@@ -50,7 +50,7 @@
       </el-table-column>
       <el-table-column label="考试时间">
         <template slot-scope="scope">
-          <span>{{ scope.row.createtime }}</span>
+          <span>{{ scope.row.createtime | parseTime }}</span>
         </template>
       </el-table-column>
     </el-table>
@@ -105,8 +105,8 @@
 </template>
 
 <script>
-import { createArticle, updateArticle } from '@/api/article'
-import { getExamNames, findByListquery } from '@/api/user'
+import { findByListquery } from '@/api/user'
+import { getExamInfo } from '@/api/login'
 import waves from '@/directive/waves' // waves directive
 import { parseTime } from '@/utils'
 import Pagination from '@/components/Pagination' // secondary package based on el-pagination
@@ -193,8 +193,10 @@ export default {
   },
   created() {
     // this.getList()
-    getExamNames().then(response => {
-      this.examName = response
+    getExamInfo().then(response => {
+      this.examName = response.map(res => {
+        return res.examName
+      })
     })
   },
   methods: {

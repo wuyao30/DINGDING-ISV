@@ -33,8 +33,23 @@ export function logout() {
 
 export function uploadMessage(data) {
   return request({
-    url: 'http://118.190.175.198:8081/login/dingding',
+    url: 'http://39.98.194.195:8090/dingding',
     headers: { 'Content-Type': 'application/json' },
+    method: 'POST',
+    data
+  })
+}
+
+export function getDepartment() {
+  return request({
+    url: 'http://39.98.194.195:8090/getdepnamelist',
+    method: 'get'
+  })
+}
+
+export function findByListquery(data) {
+  return request({
+    url: 'http://39.98.194.195:8090/exam/userscorespc',
     method: 'POST',
     data
   })
